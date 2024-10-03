@@ -1,0 +1,8 @@
+# Folders
+venv
+logs
+__pycache__
+main.dist
+
+# Files
+.env
