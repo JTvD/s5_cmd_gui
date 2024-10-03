@@ -18,7 +18,7 @@ def generate_files(num_files, file_size, directory):
 
 if __name__ == "__main__":
     # Directory to store the files
-    directory = "C:/Users/tim/Downloads/temp1"
+    directory = "temp"
 
     # Number of files
     num_files = 100000
