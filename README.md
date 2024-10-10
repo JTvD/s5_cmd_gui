@@ -12,8 +12,8 @@ Important notes:
 - Build and tested with python 3.11.9 on windows, does not support other OSes at the moment
 - Package is not activitely maintained
 - s5cmd sync functionally is bugged, therefore only the copy is supported 
-- opening folders with thousands of files in the explorer takes minutes, this a nown issue.
-
+- Opening folders with thousands of files in the explorer takes minutes, this a nown issue.
+- Dataversioning is not tested, this is something to be carefull with
 
 ## Setup
 The script requires an AWS confiuration and an environment file to run. The following chapters describe how to set this up.
