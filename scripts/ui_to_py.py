@@ -14,7 +14,7 @@ def run_cmd(cmd: str):
     else:
         ps = run(cmd, stderr=STDOUT, shell=True, universal_newlines=True, executable="/bin/bash")
     # Print all errors
-    if ps.stderr is not None:
+    if ps.stderr is not None or ps.returncode != 0:
         print(f"commandline error: {ps.stderr}")
         raise Exception("shell run error")
 
@@ -36,17 +36,21 @@ def os_specific_settings():
     return (python, cmd_sep)
 
 
-def ui_to_py(ui_folder: Path):
+def ui_to_py(ui_folder: Path, venv_activate: str, cmd_sep: str):
     """ Convert the .ui files to .py files
         pyside6-uic gui/MainWindow.ui -o gui/MainWindow.py
         Args:
             ui_folder : Path
                 folder containing the .ui files
+            venv_activate : str
+                command to activate the virtual environment
+            cmd_sep : str
+                command separator
     """
     for ui_file in ui_folder.glob('*.ui'):
         py_file = ui_file.with_suffix('.py')
         print(f"Converting {py_file.name} to .py")
-        run_cmd(f"""pyside6-uic "{ui_file}" -o "{py_file}" """)
+        run_cmd(f"""{venv_activate} {cmd_sep} pyside6-uic "{ui_file}" -o "{py_file}" """)
 
 
 def remove_pyui_files(ui_folder: Path):

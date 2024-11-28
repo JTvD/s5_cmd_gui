@@ -22,17 +22,12 @@ def replace_folder(source, destination):
 def create_exe():
     (python, cmd_sep) = uipy.os_specific_settings()
 
-    # Step 1 Convert .ui files to .py files
-    # Recompiling is the best way to ensure they are up to date
-    uipy.remove_pyui_files(ui_folder)
-    uipy.ui_to_py(ui_folder)
-
-    # Step 2: Setup
-    # Step 2a, Ensure the folder for the venv exists
+    # Step 1: Setup
+    # Step 1a, Ensure the folder for the venv exists
     if (not venv.exists()) or (not venv.is_dir()):
         venv.mkdir()
 
-    # Step 2b, Create the venv if needed
+    # Step 1b, Create the venv if needed
     # windows
     if system()[0].upper() == "W":
         venv_activate = venv.joinpath('Scripts', 'activate.bat')
@@ -47,6 +42,11 @@ def create_exe():
         uipy.run_cmd(f"{venv_activate} {cmd_sep} pip install -r requirements.txt")
     else:
         venv_activate = f"\"{str(venv_activate)}\""
+
+    # Step 2 Convert .ui files to .py files
+    # Recompiling is the best way to ensure they are up to date
+    uipy.remove_pyui_files(ui_folder)
+    uipy.ui_to_py(ui_folder, venv_activate, cmd_sep)
 
     # Step 3, Activate venv and run nuitka
     cmd = f"{venv_activate} {cmd_sep} python -m nuitka "
