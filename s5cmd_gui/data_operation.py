@@ -212,7 +212,7 @@ class DataOperation():
         try:
             while True:
                 # List objects in batches of 1000
-                response = self.s3.list_objects_v2(Bucket=self.bucket_name, Prefix=prefix)
+                response = self.s3.list_objects_v2(Bucket=self.bucket_name, Prefix=str(prefix))
                 if 'Contents' not in response:
                     break  # Exit if the bucket is empty
 

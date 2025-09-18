@@ -152,7 +152,7 @@ class mainmenu(QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
         if self.pop_up(f"Are you sure you want to delete {scality_folder}?"):
             self.TB_status.append(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}:\
                                    starting deletion of {scality_folder}. Ui might hang, please wait..")
-            self.data_operations.delete_bucket_data(ScalityPath(scality_folder))
+            self.data_operations.delete_bucket_data(ScalityPath(self.data_operations, scality_folder))
             self.TB_status.append(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: {scality_folder} deleted.")
             self.scality_model.refresh_subtree(scality_index)
 
