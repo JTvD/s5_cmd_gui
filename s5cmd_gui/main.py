@@ -60,7 +60,7 @@ class mainmenu(QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
         msgBox.setText(message)
         msgBox.setIcon(QtWidgets.QMessageBox.Question)
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok | QtWidgets.QMessageBox.Cancel)
-        response = msgBox.exec_()
+        response = msgBox.exec()
         if response == QtWidgets.QMessageBox.Ok:
             return True
         else:
@@ -154,7 +154,7 @@ class mainmenu(QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
                                    starting deletion of {scality_folder}. Ui might hang, please wait..")
             self.data_operations.delete_bucket_data(ScalityPath(self.data_operations, scality_folder))
             self.TB_status.append(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: {scality_folder} deleted.")
-            self.scality_model.refresh_subtree(scality_index)
+            self.scality_model.refresh_subtree(scality_index.parent())
 
     def update_transfer_status(self, status):
         """Helper function to update the data transfer thread"""
